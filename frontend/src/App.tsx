@@ -119,9 +119,12 @@ function FloatingTags() {
     }
   }, [])
 
+  const isMobile = window.innerWidth <= 768
+  const tags = isMobile ? FLOATING_TAGS.slice(0, 8) : FLOATING_TAGS
+
   return (
     <div className="floating-tags" ref={containerRef} aria-hidden="true">
-      {FLOATING_TAGS.map((tag) => (
+      {tags.map((tag) => (
         <span
           key={tag}
           className="floating-pill"
