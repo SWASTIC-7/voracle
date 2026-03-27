@@ -12,6 +12,9 @@ const FLOATING_TAGS = [
   'Vulnerability', 'Container Security', 'SAST', 'DAST',
 ]
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '').trim().replace(/\/$/, '')
+const ASSESS_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/assess` : '/assess'
+
 function FloatingTags() {
   const containerRef = useRef<HTMLDivElement>(null)
   const mouseRef = useRef({ x: -9999, y: -9999 })
@@ -228,7 +231,7 @@ function App() {
     formData.append('file', file)
 
     try {
-      const response = await fetch('/assess', {
+      const response = await fetch(ASSESS_ENDPOINT, {
         method: 'POST',
         body: formData,
       })
